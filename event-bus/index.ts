@@ -17,6 +17,9 @@ app.post('/events', (req, res) => {
   axios
     .post('http://localhost:4002/events', event)
     .catch((res) => console.log('ERR PORT 4002'));
+  axios
+    .post('http://localhost:4003/events', event)
+    .catch((res) => console.log('ERR PORT 4003'));
 
   res.send({ status: 'OK' });
 });
