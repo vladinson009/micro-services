@@ -1,11 +1,14 @@
 import express from 'express';
 import axios from 'axios';
 
+const events = [] as any[];
+
 const app = express();
 app.use(express.json());
 
 app.post('/events', (req, res) => {
   const event = req.body;
+  events.push(event);
   console.log(event);
 
   axios
@@ -22,6 +25,10 @@ app.post('/events', (req, res) => {
     .catch((res) => console.log('ERR PORT 4003'));
 
   res.send({ status: 'OK' });
+});
+
+app.get('/events', (req, res) => {
+  res.send(events);
 });
 
 app.listen(4005, () => {
