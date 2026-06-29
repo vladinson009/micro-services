@@ -1,17 +1,29 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: posts-depl
+    name: posts-depl
 spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: posts
-  template:
-    metadata:
-      labels:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: posts
+    template:
+        metadata:
+            labels:
+                app: posts
+        spec:
+            containers:
+                - name: posts
+                  image: vladinson009/posts #:latest works also
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: posts-clusterip-srv
+spec:
+    selector:
         app: posts
-    spec:
-      containers:
+    ports:
         - name: posts
-          image: vladinson009/posts #:latest works also
+          port: 4000
+          targetPort: 4000
