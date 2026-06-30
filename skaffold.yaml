@@ -1,0 +1,57 @@
+apiVersion: skaffold/v4beta3
+kind: Config
+manifests:
+    rawYaml:
+        - ./infra/k8s/*
+build:
+    local:
+        push: false
+    artifacts:
+        - image: vladinson009/client
+          context: client
+          docker:
+              dockerfile: Dockerfile
+          sync:
+              manual:
+                  - dest: .
+                    src: 'src/**/*.ts'
+        - image: vladinson009/comments
+          context: comments
+          docker:
+              dockerfile: Dockerfile
+          sync:
+              manual:
+                  - dest: .
+                    src: '*.ts'
+        - image: vladinson009/event-bus
+          context: event-bus
+          docker:
+              dockerfile: Dockerfile
+          sync:
+              manual:
+                  - dest: .
+                    src: '*.ts'
+        - image: vladinson009/moderation
+          context: moderation
+          docker:
+              dockerfile: Dockerfile
+          sync:
+              manual:
+                  - dest: .
+                    src: '*.ts'
+        - image: vladinson009/posts
+          context: posts
+          docker:
+              dockerfile: Dockerfile
+          sync:
+              manual:
+                  - dest: .
+                    src: '*.ts'
+        - image: vladinson009/query
+          context: query
+          docker:
+              dockerfile: Dockerfile
+          sync:
+              manual:
+                  - dest: .
+                    src: '*.ts'
