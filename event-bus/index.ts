@@ -15,7 +15,7 @@ app.post('/events', (req, res) => {
         .post('http://posts-clusterip-srv:4000/events', event)
         .catch((res) => console.log('ERR PORT 400'));
     axios
-        .post('http://comments-srv :4001/events', event)
+        .post('http://comments-srv:4001/events', event)
         .catch((res) => console.log('ERR PORT 4001'));
     axios
         .post('http://query-srv:4002/events', event)
