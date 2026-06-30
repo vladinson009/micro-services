@@ -35,12 +35,14 @@ app.post('/events', (req, res) => {
 app.listen(4002, async () => {
     console.log('query on PORT: 4002');
 
-    const res = await axios.get('http://event-bus-srv:4005/events');
+    try {
+        const res = await axios.get('http://event-bus-srv:4005/events');
 
-    for (let event of res.data) {
-        console.log('Processing event:', event.type);
-        handleEvent(event.type, event.data);
-    }
+        for (let event of res.data) {
+            console.log('Processing event:', event.type);
+            handleEvent(event.type, event.data);
+        }
+    } catch (error) {}
 });
 
 function handleEvent(type: any, data: any) {
